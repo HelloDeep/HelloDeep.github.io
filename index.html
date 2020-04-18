@@ -142,6 +142,81 @@
 
 </article>
     
+    <article id="post-GloVe词向量转化为Word2Vec文件格式" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/"
+    >GloVe词向量转化为Word2Vec文件格式</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" class="article-date">
+  <time datetime="2020-04-18T04:01:02.000Z" itemprop="datePublished">2020-04-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/word-embeddings/">word embeddings</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
+<blockquote>
+<p>词向量的总数 词向量的维度<br>词，对应的词向量<br>词，对应的词向量</p>
+<p>…</p>
+</blockquote>
+<p>不过<strong>GloVe</strong>词向量文件不包含上面格式中第一行的信息，因此我们需要加上这行的信息，也就是在第一行添加<strong>词向量的总数 词向量的维度</strong>这个信息，词向量文件才可以被gensim加载使用。</p>
+      
+      <a class="article-more-link" href="/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GloVe/" rel="tag">GloVe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word2Vec/" rel="tag">Word2Vec</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+
+</article>
+    
     <article id="post-服务器操作汇总" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
