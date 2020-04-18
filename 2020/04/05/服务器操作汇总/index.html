@@ -62,7 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">279字</span>
+            <span class="post-count">339字</span>
         </span>
     </span>
 
@@ -105,7 +105,8 @@
 
 <h2 id="下载文件-并重命名-到当前目录"><a href="#下载文件-并重命名-到当前目录" class="headerlink" title="下载文件(并重命名)到当前目录"></a>下载文件(并重命名)到当前目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O bert_base_uncased.zip https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip</span><br></pre></td></tr></table></figure>
 
-<h2 id="linux文件截取前几行，后几行，中间几行"><a href="#linux文件截取前几行，后几行，中间几行" class="headerlink" title="linux文件截取前几行，后几行，中间几行"></a>linux文件截取前几行，后几行，中间几行</h2><p>如果你只想看文件的前100行，可以使用<strong>head</strong>命令，如:</p>
+<h2 id="linux文件截取前几行，后几行，中间几行"><a href="#linux文件截取前几行，后几行，中间几行" class="headerlink" title="linux文件截取前几行，后几行，中间几行"></a>linux文件截取前几行，后几行，中间几行</h2><p>使用Mac的过程中，有的时候想要查看一个很大的文件，但是Mac的内存不允许，我们可以指查看文件的某几行，具体代码如下。</p>
+<p>如果你只想看文件的前100行，可以使用<strong>head</strong>命令，如:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -100  filename</span><br></pre></td></tr></table></figure>
 
 <p>如果你想查看文件的后100行，可以使用<strong>tail</strong>命令，如：</p>
@@ -121,6 +122,12 @@
 
 <h2 id="Mac打开notebook"><a href="#Mac打开notebook" class="headerlink" title="Mac打开notebook"></a>Mac打开notebook</h2><p>首先cd到需要的文件目录下，然后运行如下代码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m IPython notebook</span><br></pre></td></tr></table></figure>
+
+<p>或者直接输入(推荐)：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipython notebook</span><br></pre></td></tr></table></figure>
+
+
+
 
 
 
