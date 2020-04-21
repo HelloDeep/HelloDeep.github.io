@@ -62,7 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">349字</span>
+            <span class="post-count">427字</span>
         </span>
     </span>
 
@@ -128,12 +128,23 @@
 
 <h2 id="指定GPU跑代码"><a href="#指定GPU跑代码" class="headerlink" title="指定GPU跑代码"></a>指定GPU跑代码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0 python run.py</span><br></pre></td></tr></table></figure>
 
+<h2 id="Linux-删除大文件最后一行"><a href="#Linux-删除大文件最后一行" class="headerlink" title="Linux 删除大文件最后一行"></a>Linux 删除大文件最后一行</h2><p>有的时候数据的最后一行是空行，需要将其删除，可用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i '$d' fileName</span><br></pre></td></tr></table></figure>
+
+<h2 id="命令行的一些操作"><a href="#命令行的一些操作" class="headerlink" title="命令行的一些操作"></a>命令行的一些操作</h2><ol>
+<li><p>删除整行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + c</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动到当前行的开头</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动到当前行的结尾</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + e</span><br></pre></td></tr></table></figure>
 
 
 
-
-
-
+</li>
+</ol>
 
       
       <!-- reward -->
