@@ -6,6 +6,8 @@
     <content><![CDATA[<p>这片博客用来记录在使用服务器过程中经常用到的命令。</p>
 <a id="more"></a>
 
+
+
 <h2 id="将本地文件夹复制到服务器上"><a href="#将本地文件夹复制到服务器上" class="headerlink" title="将本地文件夹复制到服务器上"></a>将本地文件夹复制到服务器上</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scp -P 20215 -r desktop/QQP dingp@210.28.133.13:/home/user_data55/dingp/transformers</span><br></pre></td></tr></table></figure>
 
 <h2 id="将服务器上的文件复制到本地"><a href="#将服务器上的文件复制到本地" class="headerlink" title="将服务器上的文件复制到本地"></a>将服务器上的文件复制到本地</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp -P 20215 dingp@210.28.133.13:&#x2F;home&#x2F;user_data55&#x2F;dingp&#x2F;transformers&#x2F;models&#x2F;bert_base_uncased.zip desktop&#x2F;</span><br></pre></td></tr></table></figure>
@@ -54,56 +56,9 @@
       </tags>
   </entry>
   <entry>
-    <title>《End-to-End Paraphrase Generation》论文阅读</title>
-    <url>/2020/05/13/%E3%80%8AAn-End-to-End-Generative-Architecture-for-Paraphrase-Generation%E3%80%8B%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</url>
-    <content><![CDATA[<p><img src="https://pic.downk.cc/item/5ebb4651c2a9a83be565d029.png" alt=""></p>
-<a id="more"></a>
-
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>目前的复述生成模型面临的挑战：</p>
-<ol>
-<li>RNN的曝光偏差(exposure bias)问题</li>
-<li>经常生成一些不实际的句子(不通顺、莫名其妙的句子)</li>
-</ol>
-<p>针对这些挑战，我们提出了第一个端到端的<strong>条件生成架构</strong>，<strong>通过对抗训练来生成paraphrases</strong>.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>复述生成方法可以分为三大家族：</p>
-<ol>
-<li><p><strong>将复述生成作为 sequence-to-sequence 问题来做</strong>。主要是借鉴了机器翻译领域的经验。主要工作有：堆叠的残差LSTM(stacked residual LSTM, 2016年)。之后有很多工作引入额外的信息来加强模型的性能，但是这些方法很大程度上依赖于外部的语义信息；</p>
-</li>
-<li><p><strong>利用强化学习来做</strong>；</p>
-</li>
-<li><p><strong>利用生成架构(generative architecture)来做</strong>。也是本篇工作所关注的方法。之前的工作利用CVAEs(Conditional Variational Auto-Encoders)来做，它存在两个主要的缺陷：</p>
-<p>（1）会生成不切实际的句子</p>
-<p>（2）learning 和 inference 时输入的不一致会导致RNN结构的曝光偏差问题</p>
-</li>
-</ol>
-<p><strong>我们的做法</strong>：</p>
-<p><strong>将 CVAE 作为 GAN 的生成器，并为它定制一个判别器，判别器将对生成器生成的句子和真实的句子进行判别，并给出反馈信号给生成器，最终生成更加实际、模型难以判别真假的句子。其实就是利用 CVAE 先做生成，并用一个额外的判别器来对其加强。</strong></p>
-<blockquote>
-<p>我有一点疑问，论文中说，判别器对整个真实的句子和整个生成的句子进行比较，而不是单个词单个词的比较，并且说这样做原则上可以缓解曝光偏差的问题，不是很明白是怎么做的？</p>
-</blockquote>
-<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><p>先来回顾一下 VAE 和 CVAE 的知识。</p>
-<blockquote>
-<p>我看到的几个关于 VAE 相关知识的博客：</p>
-<ol>
-<li><a href="https://kexue.fm/archives/5253" target="_blank" rel="noopener">变分自编码器（一）：原来是这么一回事</a></li>
-<li><a href="https://www.cnblogs.com/initial-h/p/9468974.html" target="_blank" rel="noopener">Gumbel-Softmax Trick和Gumbel分布</a></li>
-<li><a href="https://www.bilibili.com/video/BV1Qt411A7yD?from=search&seid=9018672579585884765" target="_blank" rel="noopener">深度有趣的人工智能实战：变分自编码器</a></li>
-<li><a href="https://blog.csdn.net/bitcarmanlee/article/details/86440851" target="_blank" rel="noopener">普通正态分布如何转换到标准正态分布</a></li>
-</ol>
-</blockquote>
-]]></content>
-      <categories>
-        <category>paper notes</category>
-        <category>paraphrase generation</category>
-      </categories>
-      <tags>
-        <tag>paraphrase generation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>组会报告专题</title>
     <url>/2020/04/23/%E7%BB%84%E4%BC%9A%E6%8A%A5%E5%91%8A/</url>
-    <content><![CDATA[<p>由于疫情影响，我们很有可能这学期就不开学了。但是每周三的组会还是照常进行的，昨晚就是我跟组里另一位同学做的报告。这篇博客呢用来记录我每次组会的材料，也算是备份吧。</p>
+    <content><![CDATA[<p>由于疫情影响，我们很有可能这学期就不开学了。但是每周三的组会还是照常进行的，这篇博客呢用来记录我每次组会的材料。</p>
 <a id="more"></a>
 
 <h2 id="2020-02-19-文本匹配相关论文分享"><a href="#2020-02-19-文本匹配相关论文分享" class="headerlink" title="2020_02_19_文本匹配相关论文分享"></a>2020_02_19_文本匹配相关论文分享</h2><p>链接: <a href="https://pan.baidu.com/s/1vvXjszlIjeFaplvlbdbsEA" target="_blank" rel="noopener">https://pan.baidu.com/s/1vvXjszlIjeFaplvlbdbsEA</a>  </p>
@@ -145,84 +100,6 @@
       <tags>
         <tag>GloVe</tag>
         <tag>Word2Vec</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>优秀博文集合</title>
-    <url>/2020/03/24/%E4%BC%98%E7%A7%80%E5%8D%9A%E6%96%87%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[<p>这篇博客用来收藏一些点赞较多，大家普遍赞同的优秀回答或者博文。有的时候，你想搞清楚一个知识点，查阅了很多资料之后，却还是一知半解。但你突然在看到某篇博客之后，茅塞顿开，相见恨晚，惊叹其写得巧妙。这篇博客就用来收藏这些“某篇博客”，反复咀嚼，温故知新。</p>
-<a id="more"></a>
-
-<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="完全图解RNN、RNN变体、Seq2Seq、Attention机制"><a href="#完全图解RNN、RNN变体、Seq2Seq、Attention机制" class="headerlink" title="完全图解RNN、RNN变体、Seq2Seq、Attention机制"></a><a href="https://zhuanlan.zhihu.com/p/28054589" target="_blank" rel="noopener">完全图解RNN、RNN变体、Seq2Seq、Attention机制</a></h3><blockquote>
-<p>本文主要是利用图片的形式，详细地介绍了经典的RNN、RNN几个重要变体，以及Seq2Seq模型、Attention机制。希望这篇文章能够提供一个全新的视角，帮助初学者更好地入门。</p>
-</blockquote>
-<h3 id="Understanding-LSTM-Networks"><a href="#Understanding-LSTM-Networks" class="headerlink" title="Understanding LSTM Networks"></a><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding LSTM Networks</a></h3><p>中文译文：<a href="https://www.jianshu.com/p/9dc9f41f0b29" target="_blank" rel="noopener">[译] 理解 LSTM 网络</a></p>
-<h3 id="深度学习中的注意力模型（2017版）"><a href="#深度学习中的注意力模型（2017版）" class="headerlink" title="深度学习中的注意力模型（2017版）"></a><a href="https://zhuanlan.zhihu.com/p/37601161" target="_blank" rel="noopener">深度学习中的注意力模型（2017版）</a></h3><blockquote>
-<p>注意力模型最近几年在深度学习各个领域被广泛使用，无论是图像处理、语音识别还是自然语言处理的各种不同类型的任务中，都很容易遇到注意力模型的身影。所以，了解注意力机制的工作原理对于关注深度学习技术发展的技术人员来说有很大的必要。</p>
-</blockquote>
-<h3 id="从Word-Embedding到Bert模型—自然语言处理中的预训练技术发展史"><a href="#从Word-Embedding到Bert模型—自然语言处理中的预训练技术发展史" class="headerlink" title="从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史"></a><a href="https://zhuanlan.zhihu.com/p/49271699" target="_blank" rel="noopener">从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史</a></h3><blockquote>
-<p>本文的主题是自然语言处理中的预训练过程，会大致说下NLP中的预训练技术是一步一步如何发展到Bert模型的，从中可以很自然地看到Bert的思路是如何逐渐形成的，Bert的历史沿革是什么，继承了什么，创新了什么，为什么效果那么好，主要原因是什么，以及为何说模型创新不算太大，为何说Bert是近年来NLP重大进展的集大成者。</p>
-</blockquote>
-<h3 id="放弃幻想，全面拥抱Transformer：自然语言处理三大特征抽取器（CNN-RNN-TF）比较"><a href="#放弃幻想，全面拥抱Transformer：自然语言处理三大特征抽取器（CNN-RNN-TF）比较" class="headerlink" title="放弃幻想，全面拥抱Transformer：自然语言处理三大特征抽取器（CNN/RNN/TF）比较"></a><a href="https://zhuanlan.zhihu.com/p/54743941" target="_blank" rel="noopener">放弃幻想，全面拥抱Transformer：自然语言处理三大特征抽取器（CNN/RNN/TF）比较</a></h3>]]></content>
-      <categories>
-        <category>收藏</category>
-      </categories>
-      <tags>
-        <tag>优秀博文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器翻译论文阅读笔记</title>
-    <url>/2020/03/19/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>这篇博客用来记录自己在学习<strong>机器翻译</strong> (Mathine Translation) 过程中阅读的论文，坚持阅读高质量论文并不断拓展自己的思维对每一位科研工作者都非常重要。</p>
-<a id="more"></a>
-
-<h2 id="Recurrent-Continuous-Translation-Models"><a href="#Recurrent-Continuous-Translation-Models" class="headerlink" title="Recurrent Continuous Translation Models"></a>Recurrent Continuous Translation Models</h2><p><strong>论文地址</strong>：<a href="https://www.aclweb.org/anthology/D13-1176.pdf" target="_blank" rel="noopener">https://www.aclweb.org/anthology/D13-1176.pdf</a></p>
-<p><strong>发表在</strong>：EMNLP 2013</p>
-<p><strong>单位/作者</strong>： Oxford/[Nal Kalchbrenner &amp; Phil Blunsom]</p>
-<p>这篇论文提出了一种<strong>基于概率的连续翻译模型</strong> (probabilistic continuous translation models) ，称之为 <strong>Recurrent Continuous Translation Models</strong>。该模型只利用单词、短语和句子的连续表示，并不依赖于对齐信息或者短语翻译单元。</p>
-<p><strong>关键词</strong>：神经机器翻译的诞生；Encoder-Decoder；CNN；RNN</p>
-<p>以下为部分博客文章对其解读：</p>
-<p><a href="https://www.jiqizhixin.com/articles/machinetranslation" target="_blank" rel="noopener">【技术实践】神经机器翻译 - 中英翻译探索与实战</a></p>
-<blockquote>
-<p>2013 年，Nal Kalchbrenner 和 Phil Blunsom 提出了一种用于机器翻译的新型端到端编码器-解码器结构 。该模型可以使用卷积神经网络（CNN）将给定的一段源文本编码成一个连续的向量，然后再使用循环神经网络（RNN）作为解码器将该状态向量转换成目标语言。<strong>他们的研究成果可以说是神经机器翻译（NMT）的诞生</strong>；神经机器翻译是一种使用深度学习神经网络获取自然语言之间的映射关系的方法。NMT 的非线性映射不同于线性的 SMT 模型，而且是使用了连接编码器和解码器的状态向量来描述语义的等价关系。此外，RNN 应该还能得到无限长句子背后的信息，从而解决所谓的「长距离重新排序（long distance reordering）」问题 。但是，「梯度爆炸/消失」问题让 RNN 实际上难以处理长距依存（long distance dependency）；因此，NMT 模型一开始的表现并不好。</p>
-</blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/56431190" target="_blank" rel="noopener">不用看数学公式！图解谷歌神经机器翻译核心部分：注意力机制</a></p>
-<blockquote>
-<p>这个新模型使用的是端到端的编码器-解码器结构。</p>
-<p>在处理翻译工作的时候，先用卷积神经网络（CNN），将原始文本编码成连续的向量，然后使用循环神经网络（RNN）将连续向量转换成目标语言。</p>
-<p>但由于梯度爆炸/消失的存在，使用这种方法很难获取更长句子背后的信息，导致翻译性能大幅下降。</p>
-</blockquote>
-<p><a href="https://www.cnblogs.com/zhbzz2007/p/6276712.html" target="_blank" rel="noopener">神经机器翻译（NMT）相关资料整理</a></p>
-<blockquote>
-<p>2013年，英国牛津大学的Kalchbrenner和Blunsom首先提出了 End2End神经机器翻译，他们为机器翻译提出了一个“编码-解码”的新框架：给定一个源语言句子，首先使用一个解码器将其映射为一个连续、稠密的向量，然后再使用一个解码器将该向量转化为一个目标语言句子。编码器使用的是卷积神经网络（Convolutional Neural Network），解码器用的是递归神经网络（Recurrent Neural Network）。使用递归神经网络具有能够捕获全部历史信息和传力变长字符串的优点。这是一个非常大胆的新架构，用非线性模型取代统计机器翻译的线性模型；用单个复杂的神经网络取代隐结构流水线；用连接编码器和解码器的向量来描述语义等价性；用递归神经网络捕获无限长的历史信息。然后End 2 End神经机器翻译最初并没有获得理想的翻译性能，一个重要原因是训练递归神经网络时面临着“梯度消失”和“梯度爆炸”问题。因此，虽然递归神经网络理论上能够捕获无限长的历史信息，但实际上难以真正处理长距离的依赖关系。</p>
-</blockquote>
-<h2 id="Sequence-to-Sequence-Learning-with-Neural-Networks"><a href="#Sequence-to-Sequence-Learning-with-Neural-Networks" class="headerlink" title="Sequence to Sequence Learning with Neural Networks"></a>Sequence to Sequence Learning with Neural Networks</h2><p><strong>论文地址</strong>：<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf</a></p>
-<p><strong>发表在</strong>：NIPS 2014</p>
-<p><strong>单位/作者</strong>： Google/[Ilya Sutskever, Oriol Vinyals &amp; Quoc V. Le]</p>
-<p><strong>关键词</strong>：</p>
-]]></content>
-      <categories>
-        <category>机器翻译</category>
-      </categories>
-      <tags>
-        <tag>机器翻译</tag>
-        <tag>论文笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我又回来啦</title>
-    <url>/2020/03/16/%E5%9B%9E%E5%BD%92%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>花了一下午时间，重新搭建了属于自己的小窝。很喜欢这个博客主题的风格，而且作者本人也在积极地维护与更新 (<a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank" rel="noopener">Github</a>)，respect～</p>
-<p>记得高三那会儿，我还是个文艺青年呢。虽然自己是理科生，却喜欢看《花火》、《读者》等陶冶情操或者心灵鸡汤类的读物，甚至还自己撰写了《高三倒计时100天》，用来记录高三毕业前100天发生在周围的有趣的事儿，后来每每翻看自己以前写的文字，倒也觉得颇为好笑哈哈。</p>
-<p>所以说我骨子里还是有一点作家的细菌的。写作嘛，无非就是天马行空，能够抒发自己的情感已经很让人满足了。我希望以后能够坚持每天写一些东西，无论是科研过程中的收获或者总结，还是生活中的酸甜苦辣雨雪晴空，就让我恣意地执笔挥墨，在这属于自己的空间里尽情地起舞吧！</p>
-<p><img src="https://pic.downk.cc/item/5e6f5733e83c3a1e3a8276e5.jpg" alt=""></p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
       </tags>
   </entry>
 </search>
