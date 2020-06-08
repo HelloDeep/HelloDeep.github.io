@@ -55,6 +55,29 @@
       </tags>
   </entry>
   <entry>
+    <title>不同粒度paraphrase的标注</title>
+    <url>/2020/06/08/%E4%B8%8D%E5%90%8C%E7%B2%92%E5%BA%A6paraphrase%E7%9A%84%E6%A0%87%E6%B3%A8/</url>
+    <content><![CDATA[<p><strong>Paraphrase</strong>，又称复述，旨在把一句话用不同的表达方式再说一遍，也就是同义异表（same meaning, different expression）。比如，句子“<strong><em>NBA中哪个球星的薪水最高？</em></strong>”的 paraphrase 可能是(说“可能是”是因为一个句子的  paraphrase 可能不止一种表达方式)“<strong><em>谁是NBA中年薪最高的球星？</em></strong>”。在自然语言处理中，paraphrase 是一个重要的任务分支，又可以分为 <strong>paraphrase detection</strong>（复述检测，分类任务）以及 <strong>paraphrase detection</strong>（复述生成，生成式任务）。</p>
+<p>Paraphrase 其实也可以从不同的粒度来看，比如下面两句话；</p>
+<blockquote>
+<p><font color=blue><em>How can I be</em> </font> <font color=green>a good geologist</font> <font color=blue><em>?</em></font></p>
+<p><font color=blue><em>What should I do to be</em></font> <font color=green>a great geologist</font> <font color=blue><em>?</em></font></p>
+</blockquote>
+<p>蓝色斜体的部分可以看作是 <strong>sentence-level 的 paraphrase</strong>，绿色的部分可以看作是 <strong>phrase-level 的 paraphrase</strong>。这篇博客主要就是完成这样一个任务：将给定的 paraphrase 句对标注成如上模式，便于后续的分析工作。</p>
+<a id="more"></a>
+
+<p>主要的思路是借鉴刘群老师在 ACL 2019 上发表的文章</p>
+]]></content>
+      <categories>
+        <category>paraphrase</category>
+      </categories>
+      <tags>
+        <tag>paraphrase</tag>
+        <tag>word alignment</tag>
+        <tag>NLP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>组会报告专题</title>
     <url>/2020/04/23/%E7%BB%84%E4%BC%9A%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<p>这篇博客用来备份我在组会上报告的slides。</p>
