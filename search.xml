@@ -55,6 +55,21 @@
       </tags>
   </entry>
   <entry>
+    <title>各种基础知识扫盲</title>
+    <url>/2020/06/10/%E5%90%84%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%89%AB%E7%9B%B2/</url>
+    <content><![CDATA[<p>各种知识点汇总，积少成多，聚沙成塔。</p>
+<p><img src="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg" alt=""></p>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>知识点扫盲</category>
+      </categories>
+      <tags>
+        <tag>知识点扫盲</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>不同粒度paraphrase的标注</title>
     <url>/2020/06/08/%E4%B8%8D%E5%90%8C%E7%B2%92%E5%BA%A6paraphrase%E7%9A%84%E6%A0%87%E6%B3%A8/</url>
     <content><![CDATA[<p><strong>Paraphrase</strong>，又称复述，旨在把一句话用不同的表达方式再说一遍，也就是同义异表（same meaning, different expression）。比如，句子“<strong><em>NBA中哪个球星的薪水最高？</em></strong>”的 paraphrase 可能是(说“可能是”是因为一个句子的  paraphrase 可能不止一种表达方式)“<strong><em>谁是NBA中年薪最高的球星？</em></strong>”。在自然语言处理中，paraphrase 是一个重要的任务分支，又可以分为 <strong>paraphrase detection</strong>（复述检测，分类任务）以及 <strong>paraphrase detection</strong>（复述生成，生成式任务）。</p>
@@ -69,12 +84,12 @@
 <p>主要的思路是借鉴刘群老师在 ACL 2019 上发表的文章</p>
 ]]></content>
       <categories>
-        <category>paraphrase</category>
+        <category>自然语言处理</category>
+        <category>Paraphrase</category>
       </categories>
       <tags>
         <tag>paraphrase</tag>
         <tag>word alignment</tag>
-        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -118,7 +133,8 @@
 
 ]]></content>
       <categories>
-        <category>word embeddings</category>
+        <category>自然语言处理</category>
+        <category>词向量</category>
       </categories>
       <tags>
         <tag>GloVe</tag>
