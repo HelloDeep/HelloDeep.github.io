@@ -61,12 +61,31 @@
 <p><img src="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg" alt=""></p>
 <a id="more"></a>
 
+<h1 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h1><p><strong>自回归模型</strong>，也就是 <font color=blue><strong>Autoregressive model</strong></font>，在生成式模型的解码阶段，<strong><em>如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型</em></strong>。</p>
+<p><strong>非自回归模型</strong>，<font color=blue><strong>None-Autoregressive model</strong></font>，<strong><em>如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型</em></strong>。</p>
 ]]></content>
       <categories>
         <category>知识点扫盲</category>
       </categories>
       <tags>
         <tag>知识点扫盲</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>各种资料汇总备份</title>
+    <url>/2020/06/13/%E5%90%84%E7%A7%8D%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>这篇博客主要收集一些平时看到的比较有用的资料，比如<strong><em>某个方向的综述</em></strong>、<strong><em>优秀的书籍</em></strong>等等。</p>
+<a id="more"></a>
+
+<h2 id="《神经网络与深度学习》-复旦大学邱锡鹏老师"><a href="#《神经网络与深度学习》-复旦大学邱锡鹏老师" class="headerlink" title="《神经网络与深度学习》- 复旦大学邱锡鹏老师"></a>《神经网络与深度学习》- 复旦大学邱锡鹏老师</h2><p>链接: <a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<h2 id="《NLP预训练模型综述》-复旦大学邱锡鹏老师"><a href="#《NLP预训练模型综述》-复旦大学邱锡鹏老师" class="headerlink" title="《NLP预训练模型综述》- 复旦大学邱锡鹏老师"></a>《NLP预训练模型综述》- 复旦大学邱锡鹏老师</h2><p>链接:  <a href="https://arxiv.org/abs/2003.08271v2" target="_blank" rel="noopener">https://arxiv.org/abs/2003.08271v2</a></p>
+<h2 id="《深度多任务学习》综述"><a href="#《深度多任务学习》综述" class="headerlink" title="《深度多任务学习》综述"></a>《深度多任务学习》综述</h2><p>链接: <a href="https://arxiv.org/abs/2004.13379" target="_blank" rel="noopener">https://arxiv.org/abs/2004.13379</a></p>
+]]></content>
+      <categories>
+        <category>资料汇总</category>
+      </categories>
+      <tags>
+        <tag>资料汇总</tag>
       </tags>
   </entry>
   <entry>
