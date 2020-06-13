@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>不同粒度paraphrase的标注</title>
+    <url>/2020/06/08/%E4%B8%8D%E5%90%8C%E7%B2%92%E5%BA%A6paraphrase%E7%9A%84%E6%A0%87%E6%B3%A8/</url>
+    <content><![CDATA[<p><strong>Paraphrase</strong>，又称复述，旨在把一句话用不同的表达方式再说一遍，也就是同义异表（same meaning, different expression）。比如，句子“<strong><em>NBA中哪个球星的薪水最高？</em></strong>”的 paraphrase 可能是(说“可能是”是因为一个句子的  paraphrase 可能不止一种表达方式)“<strong><em>谁是NBA中年薪最高的球星？</em></strong>”。在自然语言处理中，paraphrase 是一个重要的任务分支，又可以分为 <strong>paraphrase detection</strong>（复述检测，分类任务）以及 <strong>paraphrase detection</strong>（复述生成，生成式任务）。</p>
+<p>Paraphrase 其实也可以从不同的粒度来看，比如下面两句话；</p>
+<blockquote>
+<p><font color=blue><em>How can I be</em> </font> <font color=green>a good geologist</font> <font color=blue><em>?</em></font></p>
+<p><font color=blue><em>What should I do to be</em></font> <font color=green>a great geologist</font> <font color=blue><em>?</em></font></p>
+</blockquote>
+<p>蓝色斜体的部分可以看作是 <strong>sentence-level 的 paraphrase</strong>，绿色的部分可以看作是 <strong>phrase-level 的 paraphrase</strong>。这篇博客主要就是完成这样一个任务：将给定的 paraphrase 句对标注成如上模式，便于后续的分析工作。</p>
+<a id="more"></a>
+
+<p>主要的思路是借鉴刘群老师在 ACL 2019 上发表的文章</p>
+]]></content>
+      <categories>
+        <category>自然语言处理</category>
+        <category>Paraphrase</category>
+      </categories>
+      <tags>
+        <tag>paraphrase</tag>
+        <tag>word alignment</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>各种基础知识扫盲</title>
+    <url>/2020/06/10/%E5%90%84%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%89%AB%E7%9B%B2/</url>
+    <content><![CDATA[<p>各种知识点汇总，积少成多，聚沙成塔。</p>
+<p><img src="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg" alt=""></p>
+<a id="more"></a>
+
+<h1 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h1><p><strong>自回归模型</strong>，也就是 <font color=blue><strong>Autoregressive model</strong></font>，在生成式模型的解码阶段，<strong><em>如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型</em></strong>。</p>
+<p><strong>非自回归模型</strong>，<font color=blue><strong>None-Autoregressive model</strong></font>，<strong><em>如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型</em></strong>。</p>
+]]></content>
+      <categories>
+        <category>知识点扫盲</category>
+      </categories>
+      <tags>
+        <tag>知识点扫盲</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GloVe词向量转化为Word2Vec文件格式</title>
+    <url>/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
+<blockquote>
+<p>词向量的总数 词向量的维度<br>词，对应的词向量<br>词，对应的词向量</p>
+<p>…</p>
+</blockquote>
+<p>不过<strong>GloVe</strong>词向量文件不包含上面格式中第一行的信息，因此我们需要加上这行的信息，也就是在第一行添加<strong>词向量的总数 词向量的维度</strong>这个信息，词向量文件才可以被gensim加载使用。</p>
+<a id="more"></a>
+
+<p>代码如下：</p>
+<p><strong>g2w.py</strong></p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> platform</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算行数，就是词向量/单词数  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFileLineNums</span><span class="params">(filename)</span>:</span>  </span><br><span class="line">    f = open(filename, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>)  </span><br><span class="line">    count = <span class="number">0</span>  </span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:  </span><br><span class="line">        count += <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux下打开词向量文件，在开头增加一行，即：词向量的总数 词向量的维度 </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepend_line</span><span class="params">(infile, outfile, line)</span>:</span>  </span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> old:  </span><br><span class="line">        <span class="keyword">with</span> open(outfile, <span class="string">'w'</span>) <span class="keyword">as</span> new:  </span><br><span class="line">            new.write(str(line) + <span class="string">"\n"</span>)  </span><br><span class="line">            shutil.copyfileobj(old, new)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows下打开词向量文件，在开头增加一行，即：词向量的总数 词向量的维度     </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepend_slow</span><span class="params">(infile, outfile, line)</span>:</span>  </span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> fin:  </span><br><span class="line">        <span class="keyword">with</span> open(outfile, <span class="string">'w'</span>) <span class="keyword">as</span> fout:  </span><br><span class="line">            fout.write(line + <span class="string">"\n"</span>)  </span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> fin:  </span><br><span class="line">                fout.write(line)  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(filename, gensim_file, num_dim)</span>:</span>  </span><br><span class="line">    num_lines = getFileLineNums(filename)  </span><br><span class="line">    gensim_file = gensim_file  </span><br><span class="line">    gensim_first_line = <span class="string">"&#123;&#125; &#123;&#125;"</span>.format(num_lines, num_dim)  </span><br><span class="line">    <span class="comment"># Prepends the line  </span></span><br><span class="line">    <span class="keyword">if</span> platform == <span class="string">"linux"</span> <span class="keyword">or</span> platform == <span class="string">"linux2"</span>:  </span><br><span class="line">        prepend_line(filename, gensim_file, gensim_first_line)  </span><br><span class="line">    <span class="keyword">else</span>:  </span><br><span class="line">        prepend_slow(filename, gensim_file, gensim_first_line)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">"Transform GloVe to Word2Vec..."</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--glv"</span>,</span><br><span class="line">                        default=<span class="string">"./glove.840B.300d.txt"</span>,</span><br><span class="line">                        help=<span class="string">"Path to a GloVe file"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--w2v"</span>,</span><br><span class="line">                        default=<span class="literal">None</span>,</span><br><span class="line">                        help=<span class="string">"Path to a Word2Vec file"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--dim"</span>,</span><br><span class="line">                        default=<span class="number">300</span>,</span><br><span class="line">                        help=<span class="string">"Dimension of the word embedding"</span>)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    load(args.glv, args.w2v, args.dim)</span><br></pre></td></tr></table></figure>
+
+<p>调用方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python g2w.py --glv .&#x2F;glove.840B.300d.txt --w2v .&#x2F;g2w.840B.300d.txt --dim 300</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>自然语言处理</category>
+        <category>词向量</category>
+      </categories>
+      <tags>
+        <tag>GloVe</tag>
+        <tag>Word2Vec</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>各种资料汇总备份</title>
+    <url>/2020/06/13/%E5%90%84%E7%A7%8D%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>这篇博客主要收集一些平时看到的比较有用的资料，比如<strong><em>某个方向的综述</em></strong>、<strong><em>优秀的书籍</em></strong>等等。</p>
+<a id="more"></a>
+
+<h2 id="《神经网络与深度学习》"><a href="#《神经网络与深度学习》" class="headerlink" title="《神经网络与深度学习》"></a>《神经网络与深度学习》</h2><p>链接: <a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<h2 id="《NLP预训练模型综述》"><a href="#《NLP预训练模型综述》" class="headerlink" title="《NLP预训练模型综述》"></a>《NLP预训练模型综述》</h2><p>链接:  <a href="https://arxiv.org/abs/2003.08271v2" target="_blank" rel="noopener">https://arxiv.org/abs/2003.08271v2</a></p>
+<h2 id="《深度多任务学习综述》"><a href="#《深度多任务学习综述》" class="headerlink" title="《深度多任务学习综述》"></a>《深度多任务学习综述》</h2><p>链接: <a href="https://arxiv.org/abs/2004.13379" target="_blank" rel="noopener">https://arxiv.org/abs/2004.13379</a></p>
+<h2 id="《知识图谱-实体关系抽取》"><a href="#《知识图谱-实体关系抽取》" class="headerlink" title="《知识图谱/实体关系抽取》"></a>《知识图谱/实体关系抽取》</h2><p><a href="https://zhuanlan.zhihu.com/p/91762831" target="_blank" rel="noopener">知识图谱从哪里来：实体关系抽取的现状与未来</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/77868938" target="_blank" rel="noopener">nlp中的实体关系抽取方法总结</a>、<a href="https://github.com/loujie0822/DeepIE" target="_blank" rel="noopener">基于深度学习的信息抽取技术</a></p>
+<p>论文: <a href="https://arxiv.org/abs/2004.03186" target="_blank" rel="noopener">https://arxiv.org/abs/2004.03186</a></p>
+]]></content>
+      <categories>
+        <category>资料汇总</category>
+      </categories>
+      <tags>
+        <tag>资料汇总</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>服务器操作汇总</title>
     <url>/2020/04/05/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<p>这篇博客用来记录在使用服务器过程中经常用到的命令。</p>
@@ -55,65 +145,6 @@
       </tags>
   </entry>
   <entry>
-    <title>各种基础知识扫盲</title>
-    <url>/2020/06/10/%E5%90%84%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%89%AB%E7%9B%B2/</url>
-    <content><![CDATA[<p>各种知识点汇总，积少成多，聚沙成塔。</p>
-<p><img src="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg" alt=""></p>
-<a id="more"></a>
-
-<h1 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h1><p><strong>自回归模型</strong>，也就是 <font color=blue><strong>Autoregressive model</strong></font>，在生成式模型的解码阶段，<strong><em>如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型</em></strong>。</p>
-<p><strong>非自回归模型</strong>，<font color=blue><strong>None-Autoregressive model</strong></font>，<strong><em>如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型</em></strong>。</p>
-]]></content>
-      <categories>
-        <category>知识点扫盲</category>
-      </categories>
-      <tags>
-        <tag>知识点扫盲</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>各种资料汇总备份</title>
-    <url>/2020/06/13/%E5%90%84%E7%A7%8D%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E5%A4%87%E4%BB%BD/</url>
-    <content><![CDATA[<p>这篇博客主要收集一些平时看到的比较有用的资料，比如<strong><em>某个方向的综述</em></strong>、<strong><em>优秀的书籍</em></strong>等等。</p>
-<a id="more"></a>
-
-<h2 id="《神经网络与深度学习》-复旦大学邱锡鹏老师"><a href="#《神经网络与深度学习》-复旦大学邱锡鹏老师" class="headerlink" title="《神经网络与深度学习》- 复旦大学邱锡鹏老师"></a>《神经网络与深度学习》- 复旦大学邱锡鹏老师</h2><p>链接: <a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
-<h2 id="《NLP预训练模型综述》-复旦大学邱锡鹏老师"><a href="#《NLP预训练模型综述》-复旦大学邱锡鹏老师" class="headerlink" title="《NLP预训练模型综述》- 复旦大学邱锡鹏老师"></a>《NLP预训练模型综述》- 复旦大学邱锡鹏老师</h2><p>链接:  <a href="https://arxiv.org/abs/2003.08271v2" target="_blank" rel="noopener">https://arxiv.org/abs/2003.08271v2</a></p>
-<h2 id="《深度多任务学习》综述"><a href="#《深度多任务学习》综述" class="headerlink" title="《深度多任务学习》综述"></a>《深度多任务学习》综述</h2><p>链接: <a href="https://arxiv.org/abs/2004.13379" target="_blank" rel="noopener">https://arxiv.org/abs/2004.13379</a></p>
-<h2 id="知识图谱-实体关系抽取-清华大学刘知远老师"><a href="#知识图谱-实体关系抽取-清华大学刘知远老师" class="headerlink" title="知识图谱/实体关系抽取 - 清华大学刘知远老师"></a>知识图谱/实体关系抽取 - 清华大学刘知远老师</h2><p>知乎: <a href="https://zhuanlan.zhihu.com/p/91762831" target="_blank" rel="noopener">知识图谱从哪里来：实体关系抽取的现状与未来</a></p>
-<p>论文: <a href="https://arxiv.org/abs/2004.03186" target="_blank" rel="noopener">https://arxiv.org/abs/2004.03186</a></p>
-]]></content>
-      <categories>
-        <category>资料汇总</category>
-      </categories>
-      <tags>
-        <tag>资料汇总</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>不同粒度paraphrase的标注</title>
-    <url>/2020/06/08/%E4%B8%8D%E5%90%8C%E7%B2%92%E5%BA%A6paraphrase%E7%9A%84%E6%A0%87%E6%B3%A8/</url>
-    <content><![CDATA[<p><strong>Paraphrase</strong>，又称复述，旨在把一句话用不同的表达方式再说一遍，也就是同义异表（same meaning, different expression）。比如，句子“<strong><em>NBA中哪个球星的薪水最高？</em></strong>”的 paraphrase 可能是(说“可能是”是因为一个句子的  paraphrase 可能不止一种表达方式)“<strong><em>谁是NBA中年薪最高的球星？</em></strong>”。在自然语言处理中，paraphrase 是一个重要的任务分支，又可以分为 <strong>paraphrase detection</strong>（复述检测，分类任务）以及 <strong>paraphrase detection</strong>（复述生成，生成式任务）。</p>
-<p>Paraphrase 其实也可以从不同的粒度来看，比如下面两句话；</p>
-<blockquote>
-<p><font color=blue><em>How can I be</em> </font> <font color=green>a good geologist</font> <font color=blue><em>?</em></font></p>
-<p><font color=blue><em>What should I do to be</em></font> <font color=green>a great geologist</font> <font color=blue><em>?</em></font></p>
-</blockquote>
-<p>蓝色斜体的部分可以看作是 <strong>sentence-level 的 paraphrase</strong>，绿色的部分可以看作是 <strong>phrase-level 的 paraphrase</strong>。这篇博客主要就是完成这样一个任务：将给定的 paraphrase 句对标注成如上模式，便于后续的分析工作。</p>
-<a id="more"></a>
-
-<p>主要的思路是借鉴刘群老师在 ACL 2019 上发表的文章</p>
-]]></content>
-      <categories>
-        <category>自然语言处理</category>
-        <category>Paraphrase</category>
-      </categories>
-      <tags>
-        <tag>paraphrase</tag>
-        <tag>word alignment</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>组会报告专题</title>
     <url>/2020/04/23/%E7%BB%84%E4%BC%9A%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<p>这篇博客用来备份我在组会上报告的slides。</p>
@@ -130,36 +161,6 @@
       </categories>
       <tags>
         <tag>组会报告</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GloVe词向量转化为Word2Vec文件格式</title>
-    <url>/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
-<blockquote>
-<p>词向量的总数 词向量的维度<br>词，对应的词向量<br>词，对应的词向量</p>
-<p>…</p>
-</blockquote>
-<p>不过<strong>GloVe</strong>词向量文件不包含上面格式中第一行的信息，因此我们需要加上这行的信息，也就是在第一行添加<strong>词向量的总数 词向量的维度</strong>这个信息，词向量文件才可以被gensim加载使用。</p>
-<a id="more"></a>
-
-<p>代码如下：</p>
-<p><strong>g2w.py</strong></p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> platform</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算行数，就是词向量/单词数  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFileLineNums</span><span class="params">(filename)</span>:</span>  </span><br><span class="line">    f = open(filename, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>)  </span><br><span class="line">    count = <span class="number">0</span>  </span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:  </span><br><span class="line">        count += <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux下打开词向量文件，在开头增加一行，即：词向量的总数 词向量的维度 </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepend_line</span><span class="params">(infile, outfile, line)</span>:</span>  </span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> old:  </span><br><span class="line">        <span class="keyword">with</span> open(outfile, <span class="string">'w'</span>) <span class="keyword">as</span> new:  </span><br><span class="line">            new.write(str(line) + <span class="string">"\n"</span>)  </span><br><span class="line">            shutil.copyfileobj(old, new)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows下打开词向量文件，在开头增加一行，即：词向量的总数 词向量的维度     </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepend_slow</span><span class="params">(infile, outfile, line)</span>:</span>  </span><br><span class="line">    <span class="keyword">with</span> open(infile, <span class="string">'r'</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> fin:  </span><br><span class="line">        <span class="keyword">with</span> open(outfile, <span class="string">'w'</span>) <span class="keyword">as</span> fout:  </span><br><span class="line">            fout.write(line + <span class="string">"\n"</span>)  </span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> fin:  </span><br><span class="line">                fout.write(line)  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(filename, gensim_file, num_dim)</span>:</span>  </span><br><span class="line">    num_lines = getFileLineNums(filename)  </span><br><span class="line">    gensim_file = gensim_file  </span><br><span class="line">    gensim_first_line = <span class="string">"&#123;&#125; &#123;&#125;"</span>.format(num_lines, num_dim)  </span><br><span class="line">    <span class="comment"># Prepends the line  </span></span><br><span class="line">    <span class="keyword">if</span> platform == <span class="string">"linux"</span> <span class="keyword">or</span> platform == <span class="string">"linux2"</span>:  </span><br><span class="line">        prepend_line(filename, gensim_file, gensim_first_line)  </span><br><span class="line">    <span class="keyword">else</span>:  </span><br><span class="line">        prepend_slow(filename, gensim_file, gensim_first_line)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">"Transform GloVe to Word2Vec..."</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--glv"</span>,</span><br><span class="line">                        default=<span class="string">"./glove.840B.300d.txt"</span>,</span><br><span class="line">                        help=<span class="string">"Path to a GloVe file"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--w2v"</span>,</span><br><span class="line">                        default=<span class="literal">None</span>,</span><br><span class="line">                        help=<span class="string">"Path to a Word2Vec file"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"--dim"</span>,</span><br><span class="line">                        default=<span class="number">300</span>,</span><br><span class="line">                        help=<span class="string">"Dimension of the word embedding"</span>)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    load(args.glv, args.w2v, args.dim)</span><br></pre></td></tr></table></figure>
-
-<p>调用方法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python g2w.py --glv .&#x2F;glove.840B.300d.txt --w2v .&#x2F;g2w.840B.300d.txt --dim 300</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>自然语言处理</category>
-        <category>词向量</category>
-      </categories>
-      <tags>
-        <tag>GloVe</tag>
-        <tag>Word2Vec</tag>
       </tags>
   </entry>
 </search>
