@@ -28,7 +28,7 @@
 <meta property="og:description" content="各种知识点汇总，积少成多，聚沙成塔。">
 <meta property="og:image" content="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg">
 <meta property="article:published_time" content="2020-06-10T14:12:37.000Z">
-<meta property="article:modified_time" content="2020-06-13T08:33:32.752Z">
+<meta property="article:modified_time" content="2020-06-23T00:18:18.875Z">
 <meta property="article:author" content="Deep">
 <meta property="article:tag" content="知识点扫盲">
 <meta name="twitter:card" content="summary">
@@ -231,7 +231,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-13 16:33:32" itemprop="dateModified" datetime="2020-06-13T16:33:32+08:00">2020-06-13</time>
+                <time title="修改时间：2020-06-23 08:18:18" itemprop="dateModified" datetime="2020-06-23T08:18:18+08:00">2020-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,8 +258,21 @@
 <p><img src="https://pic.downk.cc/item/5ee0edbdc2a9a83be5fc414c.jpg" alt=""></p>
 <a id="more"></a>
 
-<h1 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h1><p><strong>自回归模型</strong>，也就是 <font color=blue><strong>Autoregressive model</strong></font>，在生成式模型的解码阶段，<strong><em>如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型</em></strong>。</p>
-<p><strong>非自回归模型</strong>，<font color=blue><strong>None-Autoregressive model</strong></font>，<strong><em>如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型</em></strong>。</p>
+<h2 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h2><p><strong>自回归模型</strong>，也就是 <strong>Autoregressive model</strong>。如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型。</p>
+<p><strong>非自回归模型</strong>，<strong>None-Autoregressive model</strong>。如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型。</p>
+<h2 id="极大似然概率"><a href="#极大似然概率" class="headerlink" title="极大似然概率"></a>极大似然概率</h2><p><strong>极大似然概率</strong>，一般简写成 $L(\theta|x)$，它是一个关于参数 $\theta$ 的函数。<strong>似然</strong>跟<strong>概率</strong>的区别就是：概率在特定环境下(即已知$\theta$)某件事情发生的可能性，它只在事件没发生前有效；而<strong>似然</strong>则是<strong>在确定的结果下去推测产生这个结果的可能环境</strong>(即$\theta$)。</p>
+<blockquote>
+<p>举个简单的例子，我们投掷硬币10次，得到了：正正反反正反反正正反 的结果，即5次正面朝上，5次反面朝上。假设硬币正面朝上的概率是$P$，那么反面朝上的概率就是$1-P$，这个事件的结果可以描述为：$P^5(1-P)^5$，我们对它求导并令其等于0，可以算出当$P=0.5$时事件发生的概率最大，那么$P=0.5$就是我们根据已发生的事件估计出来的，也就是最大似然估计。</p>
+<p>在实际应用中，我们通常需要用到累乘，比如上面的$P^5(1-P)^5$，亦或是NLP中<strong>skip-gram</strong>模型，根据当前词预测固定窗口内的上下文的词的时候：</p>
+<p>$$L(\theta) = \prod_{-m\leqslant j \leqslant m}{P(W_{t+j}|W_t;\theta)}$$</p>
+<p>其中$\theta$是所有要优化的参数，$m$是滑动窗口的大小，$W_t$是当前词(center word)，$W_{t+j}$是要预测的上下文(context)。这时候为了之后的求导以及运算的方便，通常利用<strong>对数将累乘转化为累加</strong>，并加上负号使得<strong>最大化似然概率问题转化为最小化损失函数问题</strong>。</p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://github.com/LooperXX/CS224n-Reading-Notes/blob/master/CS224n-2019-01-Introduction%20and%20Word%20Vectors.pdf" target="_blank" rel="noopener">CS224n-2019-01-Introduction and Word Vectors.pdf</a></li>
+<li><a href="https://blog.csdn.net/u014182497/article/details/82252456" target="_blank" rel="noopener">https://blog.csdn.net/u014182497/article/details/82252456</a></li>
+<li><a href="https://blog.csdn.net/songyu0120/article/details/85059149" target="_blank" rel="noopener">https://blog.csdn.net/songyu0120/article/details/85059149</a></li>
+</ul>
 
     </div>
 
@@ -343,7 +356,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自-非回归模型"><span class="nav-number">1.</span> <span class="nav-text">自&#x2F;非回归模型</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自-非回归模型"><span class="nav-number">1.</span> <span class="nav-text">自&#x2F;非回归模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然概率"><span class="nav-number">2.</span> <span class="nav-text">极大似然概率</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -468,6 +481,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
