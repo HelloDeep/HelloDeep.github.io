@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-10 22:20:28" itemprop="dateModified" datetime="2020-06-10T22:20:28+08:00">2020-06-10</time>
+                <time title="修改时间：2020-06-23 15:46:04" itemprop="dateModified" datetime="2020-06-23T15:46:04+08:00">2020-06-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +249,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
+          <blockquote>
+<p>更新：现在直接利用gensim的包就可以完成w2v和GloVe的转换，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gensim.models <span class="keyword">import</span> KeyedVectors</span><br><span class="line"><span class="keyword">from</span> gensim.scripts.glove2word2vec <span class="keyword">import</span> glove2word2vec</span><br><span class="line"></span><br><span class="line">glove_file = <span class="string">"/Volumes/DeepData/word embeddings/GloVe/glove.840B.300d.txt"</span></span><br><span class="line">glove2word2vec(glove_file, <span class="string">"./glove.840B.300d.word2vec.txt"</span>)</span><br><span class="line"></span><br><span class="line">model = KeyedVectors.load_word2vec_format(<span class="string">"./glove.840B.300d.word2vec.txt"</span>)</span><br><span class="line">model.most_similar(<span class="string">'love'</span>, topn=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>以下为原博：</p>
+<p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
 <blockquote>
 <p>词向量的总数 词向量的维度<br>词，对应的词向量<br>词，对应的词向量</p>
 <p>…</p>

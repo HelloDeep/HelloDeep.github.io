@@ -151,7 +151,12 @@
   <entry>
     <title>GloVe词向量转化为Word2Vec文件格式</title>
     <url>/2020/04/18/GloVe%E8%AF%8D%E5%90%91%E9%87%8F%E8%BD%AC%E5%8C%96%E4%B8%BAWord2Vec%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
+    <content><![CDATA[<blockquote>
+<p>更新：现在直接利用gensim的包就可以完成w2v和GloVe的转换，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> gensim.models <span class="keyword">import</span> KeyedVectors</span><br><span class="line"><span class="keyword">from</span> gensim.scripts.glove2word2vec <span class="keyword">import</span> glove2word2vec</span><br><span class="line"></span><br><span class="line">glove_file = <span class="string">"/Volumes/DeepData/word embeddings/GloVe/glove.840B.300d.txt"</span></span><br><span class="line">glove2word2vec(glove_file, <span class="string">"./glove.840B.300d.word2vec.txt"</span>)</span><br><span class="line"></span><br><span class="line">model = KeyedVectors.load_word2vec_format(<span class="string">"./glove.840B.300d.word2vec.txt"</span>)</span><br><span class="line">model.most_similar(<span class="string">'love'</span>, topn=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>以下为原博：</p>
+<p>使用<strong>gensim</strong>加载<strong>GloVe</strong>词向量时，首先需要将GloVe词向量文件转成<strong>Word2Vec</strong>词向量的格式，即：</p>
 <blockquote>
 <p>词向量的总数 词向量的维度<br>词，对应的词向量<br>词，对应的词向量</p>
 <p>…</p>
@@ -165,8 +170,6 @@
 
 <p>调用方法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python g2w.py --glv .&#x2F;glove.840B.300d.txt --w2v .&#x2F;g2w.840B.300d.txt --dim 300</span><br></pre></td></tr></table></figure>
-
-
 
 ]]></content>
       <categories>
