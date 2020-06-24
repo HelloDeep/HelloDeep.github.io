@@ -62,7 +62,8 @@
 <a id="more"></a>
 
 <h2 id="自-非回归模型"><a href="#自-非回归模型" class="headerlink" title="自/非回归模型"></a>自/非回归模型</h2><p><strong>自回归模型</strong>，也就是 <strong>Autoregressive model</strong>。如果当前时刻decoder的输入依赖上一时刻decoder的输出的话，那么我们称这样的模型为自回归模型。</p>
-<p><strong>非自回归模型</strong>，<strong>None-Autoregressive model</strong>。如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型。</p>
+<p><strong>非自回归模型</strong>，<strong>Non-Autoregressive model</strong>。如果当前时刻decoder的输入不依赖上一时刻decoder的输出的话，那么我们称这样的模型为非自回归模型。</p>
+<p>NAT: <strong>N</strong>on-<strong>A</strong>utoregressive <strong>T</strong>ransformer</p>
 <h2 id="极大似然概率"><a href="#极大似然概率" class="headerlink" title="极大似然概率"></a>极大似然概率</h2><p><strong>极大似然概率</strong>，一般简写成 $L(\theta|x)$，它是一个关于参数 $\theta$ 的函数。<strong>似然</strong>跟<strong>概率</strong>的区别就是：概率在特定环境下(即已知$\theta$)某件事情发生的可能性，它只在事件没发生前有效；而<strong>似然</strong>则是<strong>在确定的结果下去推测产生这个结果的可能环境</strong>(即$\theta$)。</p>
 <blockquote>
 <p>举个简单的例子，我们投掷硬币10次，得到了：正正反反正反反正正反 的结果，即5次正面朝上，5次反面朝上。假设硬币正面朝上的概率是$P$，那么反面朝上的概率就是$1-P$，这个事件的结果可以描述为：$P^5(1-P)^5$，我们对它求导并令其等于0，可以算出当$P=0.5$时事件发生的概率最大，那么$P=0.5$就是我们根据已发生的事件估计出来的，也就是最大似然估计。</p>
@@ -76,6 +77,23 @@
 <li><a href="https://blog.csdn.net/u014182497/article/details/82252456" target="_blank" rel="noopener">https://blog.csdn.net/u014182497/article/details/82252456</a></li>
 <li><a href="https://blog.csdn.net/songyu0120/article/details/85059149" target="_blank" rel="noopener">https://blog.csdn.net/songyu0120/article/details/85059149</a></li>
 </ul>
+<h2 id="编辑距离"><a href="#编辑距离" class="headerlink" title="编辑距离"></a>编辑距离</h2><p><strong>编辑距离</strong>，英文名为<strong>Edit Distance</strong>，由俄罗斯科学家弗拉基米尔·莱文斯坦(Vladimir Levenshtein)在1965年提出，故又称 <strong>Levenshtein Distance</strong>。是指<strong>利用字符操作，把字符串A转换成字符串B所需要的最少操作数</strong>。其中，字符操作包括：</p>
+<p><strong>删除一个字符</strong>    a) Insert a character<br><strong>插入一个字符</strong>    b) Delete a character<br><strong>修改一个字符</strong>    c) Replace a character</p>
+<p>譬如，”kitten” 和 “sitting” 这两个单词，由 “kitten” 转换为  “sitting”  需要的最少单字符编辑操作有：</p>
+<p>1.kitten → sitten (substitution of “s” for “k”)<br>2.sitten → sittin (substitution of “i” for “e”)<br>3.sittin  → sitting (insertion of “g” at the end)</p>
+<p>因此，”kitten” 和 “sitting” 这两个单词之间的编辑距离为 3 。</p>
+<p>在python中，有现成的库来完成，首先安装编辑距离的模块：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install python-Levenshtein</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Levenshtein</span><br><span class="line">print(Levenshtein.distance(<span class="string">"kitten"</span>,<span class="string">"sitting"</span>)) <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>知识点扫盲</category>
