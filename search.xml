@@ -39,7 +39,7 @@
 <p>$$P(A) = P(A|B_1)P(B_1) + P(A|B_2)P(B_2) + … + P(A|B_n)P(B_n)$$</p>
 <p>或者：$P(A) = P(AB_1) + P(AB_2) +… + P(AB_n)$</p>
 <h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>条件概率是指<a href="https://baike.baidu.com/item/事件/6129105" target="_blank" rel="noopener">事件</a>A<strong>在事件B发生的条件下</strong>发生的概率。条件<a href="https://baike.baidu.com/item/概率" target="_blank" rel="noopener">概率</a>表示为：$$P(A|B)$$，读作“A<strong>在B发生的条件下</strong>发生的概率”。若只有两个事件A，B，那么，</p>
-<p><img src="https://bkimg.cdn.bcebos.com/formula/e30d3c07ebac8545498b8acac60f34e8.svg" alt="img"></p>
+<p>$$P(A|B) = \frac{P(AB)}{P(B)}$$</p>
 <h3 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h3><p>由条件概率可得：</p>
 <p><img src="https://www.zhihu.com/equation?tex=P%28A%2CB%29%3DP%28A%7CB%29+%5Ccdot+P%28B%29+%3D+P%28B%7CA%29+%5Ccdot+P%28A%29" alt="[公式]"></p>
 <p>由此得到贝叶斯公式的常规形式：</p>
